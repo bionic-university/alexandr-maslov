@@ -3,7 +3,7 @@ echo "\nWelcome to calc 1.0 :)\n";
 echo "Enter math expression:\n";
 $expression = str_replace(" ", "", fgets(STDIN));
 
-class Calculate
+class Calculator
 {
     function validate($expression)
     {
@@ -108,7 +108,7 @@ class Calculate
     }
 }
 
-$calc = new Calculate();
+$calc = new Calculator();
 $calc->validate($expression);
 $numbers = $calc->getNumbers($expression);
 $operands = $calc->getOperands($expression);
