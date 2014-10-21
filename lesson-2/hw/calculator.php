@@ -1,7 +1,7 @@
 <?php
 echo "\nWelcome to calc 1.0 :)\n";
 echo "Enter math expression:\n";
-$expression = fgets(STDIN);
+$expression = str_replace(" ", "", fgets(STDIN));
 
 class Calculate
 {
