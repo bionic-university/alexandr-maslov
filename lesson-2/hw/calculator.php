@@ -2,7 +2,7 @@
 echo "\nWelcome to calc 1.0 :)\n";
 echo "Enter math expression:\n";
 $expression = str_replace(" ", "", fgets(STDIN));
-
+//test
 class Calculator
 {
     function validate($expression)
