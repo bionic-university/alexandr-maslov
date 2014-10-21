@@ -1,10 +1,17 @@
 <?php
 
-echo "Enter string expression\n";
-$input_string = trim(fgets(STDIN));
-
 class Palindrome
 {
+    function  Palindrome()
+    {
+        echo "Enter string expression\n";
+    }
+
+    function getString()
+    {
+        return (trim(fgets(STDIN)));
+    }
+
     function revert($input_string)
     {
         return ((string)strrev($input_string));
@@ -22,6 +29,7 @@ class Palindrome
 
 
 $palindrome = new Palindrome();
+$input_string = $palindrome->getString();
 $str_reverted = $palindrome->revert($input_string);
-$palindrome->isPalindrome($input_string,$str_reverted);
+$palindrome->isPalindrome($input_string, $str_reverted);
 
