@@ -10,7 +10,7 @@ class Shooter implements RetryInterface
     public function __construct()
     {
         echo PHP_EOL . ' Enter weapon you want to shoot with!' . PHP_EOL . ' Available: Pistol, Machinegun, Bow, Rifle, Gun' . PHP_EOL;
-        $this->weapon = trim(strtolower(str_replace(" ", "", fgets(STDIN))));
+        $this->weapon = trim(strtolower(str_replace(' ', '', fgets(STDIN))));
         echo ' Enter how much ammo you need!' . PHP_EOL . ' Example: 50, 100, 2000' . PHP_EOL;
         $this->ammo = trim(fgets(STDIN));
         $this->validate($this->weapon, $this->ammo);
@@ -34,7 +34,7 @@ class Shooter implements RetryInterface
         if ($error) {
             echo "\033[31m Sorry, you are not skilled enough to use this weapon\033[0m" . PHP_EOL;
         }
-        if (!preg_match("/^[0-9]*$/", $ammo)) {
+        if (!preg_match('/^[0-9]*$/', $ammo)) {
             echo "\033[31m Ammo must be a natural number!\033[0m" . PHP_EOL;
             $error = true;
         }
