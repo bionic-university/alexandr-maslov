@@ -2,15 +2,15 @@
 
 class Shooter
 {
-    private $weaponShootrate = ['pistol' => 60, 'machinegun' => 850, 'bow' => 12, 'rifle' => 15, 'gun' => 600];
-    private $ammo;
-    private $shootingTime;
+    private $weaponShootrate = ['pistol' => 13, 'machinegun' => 150, 'bow' => 10, 'rifle' => 20, 'gun' => 30];
 
-    private function __construct()
+    public function __construct()
     {
-        echo 'Welcome to shooting simulator 1.0 :).PHP_EOL';
-        echo "Enter math expression:\n";
-        $expression = str_replace(" ", "", fgets(STDIN));
+        echo PHP_EOL.'Welcome to shooting simulator 1.0 :)'.PHP_EOL;
+        echo 'Enter weapon you want to shoot with!'.PHP_EOL.'Available: Pistol, Machinegun, Bow, Rifle, Gun'.PHP_EOL;
+        $weapon = strtolower(str_replace(" ", "", fgets(STDIN)));
+        echo 'Enter how much ammo you need!'.PHP_EOL.'Example: 50, 100, 2000'.PHP_EOL;
+        $ammo = strtolower(str_replace(" ", "", fgets(STDIN)));
     }
 
     private function Shoot()
@@ -23,3 +23,5 @@ class Shooter
 
     }
 }
+
+$shooter = new Shooter();
