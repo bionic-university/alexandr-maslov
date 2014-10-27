@@ -7,18 +7,20 @@ class Palindrome
         echo "Enter string expression\n";
     }
 
-    function getString()
+    private function getString()
     {
-        return (trim(fgets(STDIN)));
+        return ((string)trim(fgets(STDIN)));
     }
 
-    function revert($input_string)
+    private function revert($input_string)
     {
         return ((string)strrev($input_string));
     }
 
-    function isPalindrome($input_string, $str_reverted)
+    function isPalindrome()
     {
+        $input_string = $this->getString();
+        $str_reverted = $this->revert($input_string);
         if ($input_string == $str_reverted) {
             echo "IT IS A PALINDROME\n";
         } else {
@@ -27,9 +29,6 @@ class Palindrome
     }
 }
 
-
 $palindrome = new Palindrome();
-$input_string = $palindrome->getString();
-$str_reverted = $palindrome->revert($input_string);
-$palindrome->isPalindrome($input_string, $str_reverted);
+$palindrome->isPalindrome();
 
