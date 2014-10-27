@@ -45,7 +45,13 @@ class Shooter implements RetryInterface
 
     private function shoot()
     {
-
+        echo '..._...|..____________________, ,
+....../ `---___________----_____|] = Bang-Bang==>
+...../_==o;;;;;;;;_______.:/
+.....), ---.(_(__) /
+....// (..) ), ----
+...//___//
+..//___//' . PHP_EOL;
     }
 
 
@@ -67,7 +73,8 @@ class Shooter implements RetryInterface
                 $clipsUsed = 0;
             }
         }
-        echo "\033[32m Nice shooting, you have reloaded \033[0m" . $clipsUsed . "\033[32m times\033[0m" . PHP_EOL;
+        echo "\033[32m Nice shooting! You have shot \033[0m" . ($ammo-$ammoUnused) . "\033[32m ammo\033[0m" . PHP_EOL;
+        echo "\033[32m You have reloaded \033[0m" . $clipsUsed . "\033[32m times\033[0m" . PHP_EOL;
         echo "\033[32m You have \033[0m" . $ammoUnused . "\033[32m ammo left unused\033[0m" . PHP_EOL;
         echo ' Do you want to try again? [y/n]';
         $this->retry();
