@@ -1,6 +1,6 @@
 <?php
 
-class Shooter
+class Shooter implements RetryInterface
 {
     private $weaponClip = ['pistol' => 13, 'machinegun' => 150, 'bow' => 10, 'rifle' => 20, 'gun' => 30];
     private $weapon;
@@ -17,6 +17,10 @@ class Shooter
         $this->reload($this->weapon, $this->ammo);
     }
 
+    /**
+     * @param $weapon
+     * @param $ammo
+     */
     private function validate($weapon, $ammo)
     {
         $error = true;
@@ -29,7 +33,7 @@ class Shooter
             echo "\033[31m Sorry, you are not skilled enough to use this weapon\033[0m" . PHP_EOL;
         }
         if (!preg_match("/^[0-9]*$/", $ammo)) {
-            echo "\033[31m Ammo must be integer!\033[0m" . PHP_EOL;
+            echo "\033[31m Ammo must be a natural number!\033[0m" . PHP_EOL;
             $error = true;
         }
         if ($error) {
@@ -44,6 +48,27 @@ class Shooter
 
     private function reload($weapon, $ammo)
     {
+        $clipsUsed = 0;
+        $ammoUnused = 0;
+        foreach ($this->weaponClip as $key => $value) {
+            if ($key === $weapon) {
+                $clipsUsed = floor($ammo / $value);
+                $ammoUnused = $ammo % $value;
+            }
+        }
+        echo ' Nice shooting, you have reloaded ' . $clipsUsed . ' times' . PHP_EOL;
+        echo ' You have ' . $ammoUnused . ' ammo left unused' . PHP_EOL;
+        echo ' Do you want to try again? [y/n]';
+        $this->retry();
+    }
 
+    private function retry()
+    {
+        $retry = trim(strtolower(fgets(STDIN)));
+        if ($retry == 'y') {
+            $this->__construct();
+        } else {
+            exit();
+        }
     }
 }
