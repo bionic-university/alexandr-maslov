@@ -1,5 +1,4 @@
 <?php
-echo PHP_EOL . ' Welcome to shooting simulator 1.0 :)' . PHP_EOL;
 
 class Shooter
 {
@@ -37,5 +36,3 @@ class Shooter
 
     }
 }
-
-$shooter = new Shooter();
