@@ -1,8 +1,9 @@
 <?php
+include_once('RetryInterface.php');
 
 class Shooter implements RetryInterface
 {
-    private $weaponClip = ['pistol' => 13, 'machinegun' => 150, 'bow' => 10, 'rifle' => 20, 'gun' => 30];
+    private $weaponClip = ['pistol' => 13, 'machinegun' => 150, 'bow' => 1, 'rifle' => 20, 'gun' => 30];
     private $weapon;
     private $ammo;
 
@@ -16,6 +17,7 @@ class Shooter implements RetryInterface
         $this->shoot();
         $this->reload($this->weapon, $this->ammo);
     }
+
 
     /**
      * @param $weapon
@@ -46,23 +48,32 @@ class Shooter implements RetryInterface
 
     }
 
+
+    /**
+     * @param $weapon
+     * @param $ammo
+     */
     private function reload($weapon, $ammo)
     {
         $clipsUsed = 0;
         $ammoUnused = 0;
         foreach ($this->weaponClip as $key => $value) {
-            if ($key === $weapon) {
+            if (($key === $weapon) && ($ammo >= $value)) {
                 $clipsUsed = floor($ammo / $value);
                 $ammoUnused = $ammo % $value;
             }
+            if (($key === $weapon) && ($ammo < $value)) {
+                $ammoUnused = 0;
+                $clipsUsed = 0;
+            }
         }
-        echo ' Nice shooting, you have reloaded ' . $clipsUsed . ' times' . PHP_EOL;
-        echo ' You have ' . $ammoUnused . ' ammo left unused' . PHP_EOL;
+        echo "\033[32m Nice shooting, you have reloaded \033[0m" . $clipsUsed . "\033[32m times\033[0m" . PHP_EOL;
+        echo "\033[32m You have \033[0m" . $ammoUnused . "\033[32m ammo left unused\033[0m" . PHP_EOL;
         echo ' Do you want to try again? [y/n]';
         $this->retry();
     }
 
-    private function retry()
+    public function retry()
     {
         $retry = trim(strtolower(fgets(STDIN)));
         if ($retry == 'y') {
