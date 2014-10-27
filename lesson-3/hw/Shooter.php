@@ -8,7 +8,7 @@ class Shooter
 
     public function __construct()
     {
-        echo PHP_EOL.' Enter weapon you want to shoot with!' . PHP_EOL . ' Available: Pistol, Machinegun, Bow, Rifle, Gun' . PHP_EOL;
+        echo PHP_EOL . ' Enter weapon you want to shoot with!' . PHP_EOL . ' Available: Pistol, Machinegun, Bow, Rifle, Gun' . PHP_EOL;
         $this->weapon = trim(strtolower(str_replace(" ", "", fgets(STDIN))));
         echo ' Enter how much ammo you need!' . PHP_EOL . ' Example: 50, 100, 2000' . PHP_EOL;
         $this->ammo = trim(fgets(STDIN));
@@ -19,7 +19,6 @@ class Shooter
 
     private function validate($weapon, $ammo)
     {
-        $numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
         $error = true;
         foreach ($this->weaponClip as $key => $value) {
             if ($key === $weapon) {
@@ -29,11 +28,9 @@ class Shooter
         if ($error) {
             echo "\033[31m Sorry, you are not skilled enough to use this weapon\033[0m" . PHP_EOL;
         }
-        for ($i = 0; $i < strlen($ammo); $i++) {
-            if (!in_array($ammo[$i], $numbers)) {
-                echo "\033[31m Ammo must be integer!\033[0m".PHP_EOL;
-                $error = true;
-            }
+        if (!preg_match("/^[0-9]*$/", $ammo)) {
+            echo "\033[31m Ammo must be integer!\033[0m" . PHP_EOL;
+            $error = true;
         }
         if ($error) {
             $this->__construct();
