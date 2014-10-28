@@ -3,8 +3,17 @@ include_once('RetryInterface.php');
 
 class Shooter implements RetryInterface
 {
+    /**
+     * @var array
+     */
     private $weaponClip = ['pistol' => 13, 'machinegun' => 150, 'bow' => 1, 'rifle' => 20, 'gun' => 30];
+    /**
+     * @var string
+     */
     private $weapon;
+    /**
+     * @var string
+     */
     private $ammo;
 
     public function __construct()
@@ -63,7 +72,7 @@ class Shooter implements RetryInterface
                 $clipsUsed = 0;
             }
         }
-        echo "\033[32m Nice shooting! You have shot \033[0m" . ($this->ammo-$ammoUnused) . "\033[32m ammo\033[0m" . PHP_EOL;
+        echo "\033[32m Nice shooting! You have shot \033[0m" . ($this->ammo - $ammoUnused) . "\033[32m ammo\033[0m" . PHP_EOL;
         echo "\033[32m You have reloaded \033[0m" . $clipsUsed . "\033[32m times\033[0m" . PHP_EOL;
         echo "\033[32m You have \033[0m" . $ammoUnused . "\033[32m ammo left unused\033[0m" . PHP_EOL;
         echo ' Do you want to try again? [y/n]';
