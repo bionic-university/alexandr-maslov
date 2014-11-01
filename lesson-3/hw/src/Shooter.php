@@ -1,5 +1,5 @@
 <?php
-include_once('RetryInterface.php');
+require_once('RetryInterface.php');
 
 /**
  * Class Shooter
