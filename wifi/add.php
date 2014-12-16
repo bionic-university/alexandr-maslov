@@ -159,30 +159,35 @@ include_once("templates/headerTemplate.php");
     })
     $('#addUser').click(function (e) {
         e.preventDefault();
-        var students = [];
-        var jsonString;
-        for (var iterator = 0; iterator < i; iterator++) {
-            students[iterator] = [];
-            var group = $('#inputForGroup')[0].value;
-            var username = $('#username_' + iterator)[0].value;
-            var name = $('#username_' + iterator).parent().prev().text();
-            var password = $('#password_' + iterator)[0].value;
-            var tarif = $('#newOptions_' + iterator)[0].value;
-            students[iterator].push(group, username, name, password, tarif);
-            jsonString = JSON.stringify(students);
+        if ($('#inputForGroup').val().length > 0) {
+            var students = [];
+            var jsonString;
+            for (var iterator = 0; iterator < i; iterator++) {
+                students[iterator] = [];
+                var group = $('#inputForGroup')[0].value;
+                var username = $('#username_' + iterator)[0].value;
+                var name = $('#username_' + iterator).parent().prev().text();
+                var password = $('#password_' + iterator)[0].value;
+                var tarif = $('#newOptions_' + iterator)[0].value;
+                students[iterator].push(group, username, name, password, tarif);
+                jsonString = JSON.stringify(students);
+            }
+            $.ajax({
+                url: "create.php",
+                type: 'POST',
+                data: {jsonString: jsonString},
+                async: true
+            })
+                .done(function (response) {
+                })
+                .fail(function (response) {
+                })
+                .always(function (response) {
+                });
         }
-        $.ajax({
-            url: "create.php",
-            type: 'POST',
-            data: {jsonString: jsonString},
-            async: true
-        })
-            .done(function (response) {
-            })
-            .fail(function (response) {
-            })
-            .always(function (response) {
-            });
+        else {
+            alert('Enter group name');
+        }
     })
 
 </script>
